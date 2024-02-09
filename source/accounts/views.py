@@ -1,11 +1,9 @@
 from django.db.models import Q
-from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, reverse, get_object_or_404
 from django.contrib.auth import login, get_user_model
 from django.views.generic import CreateView, DetailView, UpdateView, ListView, View
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from accounts.forms import MyUserCreationForm, UserChangeForm, SearchForm
-from django.core.paginator import Paginator
 from django.contrib.auth.views import PasswordChangeView
 
 

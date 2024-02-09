@@ -4,8 +4,8 @@ from django.shortcuts import render, reverse, get_object_or_404, redirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from ..models import Publication, Comment
-from ..forms import PublisherForm
+from webapp.models import Publication, Comment
+from webapp.forms import PublisherForm
 
 
 class HomeView(LoginRequiredMixin, ListView):

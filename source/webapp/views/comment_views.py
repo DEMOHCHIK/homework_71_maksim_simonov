@@ -1,6 +1,6 @@
 from django.views.generic.edit import CreateView, DeleteView
 from django.urls import reverse_lazy, reverse
-from ..models import Comment, Publication
+from webapp.models import Comment, Publication
 
 
 class CommentCreateView(CreateView):
