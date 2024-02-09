@@ -45,9 +45,12 @@
                             {% endif %}
                         </a>
                     {% endif %}
-                    <i class="bi bi-chat fs-3 ms-2"></i>
+                    <a class="text-dark" href="{% url 'webapp:comment_create' publication.pk %}">
+                        <i class="bi bi-chat fs-3 ms-2"></i>
+                    </a>
                 </div>
-                <span class="text-body-secondary"><span id="count_post_likes_{{ publication.pk }}">{{ publication.likes.count }}</span> отметок "Нравиться" </span>
+                <span class="text-body-secondary"><span
+                        id="count_post_likes_{{ publication.pk }}">{{ publication.likes.count }}</span> отметок "Нравиться" </span>
                 <p class="card-text">{{ publication.description }}</p>
                 <p class="card-text"><small class="text-body-secondary">{{ publication.created }}</small></p>
             </div>

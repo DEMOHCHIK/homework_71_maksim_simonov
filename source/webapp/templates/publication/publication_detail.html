@@ -44,7 +44,7 @@
                         {% endif %}
                     </a>
                 {% endif %}
-                <a class="text-dark" href="#">
+                <a class="text-dark" href="{% url 'webapp:comment_create' publication.pk %}">
                     <i class="bi bi-chat fs-3 ms-2"></i>
                 </a>
             </div>
@@ -72,8 +72,7 @@
                         </a>
                     </div>
                     <p class="card-text">{{ comment.text }}</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+                    <a href="{% url 'webapp:comment_delete' pk=comment.pk %}" class="card-link">Удалить</a>
                 </div>
             </div>
         {% endfor %}
