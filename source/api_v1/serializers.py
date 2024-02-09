@@ -12,11 +12,6 @@ class AuthorModelSerializer(serializers.ModelSerializer):
 
 class PublicationModelSerializer(serializers.ModelSerializer):
 
-    # def to_representation(self, instance):
-    #     data = super().to_representation(instance)
-    #     data['author'] = AuthorModelSerializer(instance.author).data
-    #     return data
-
     def create(self, validated_data):
         request = self.context.get('request')
         validated_data['author'] = request.user

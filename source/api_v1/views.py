@@ -1,3 +1,5 @@
+from rest_framework import status
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
@@ -17,6 +19,16 @@ class PublicationModelViewSet(ModelViewSet):
         if self.request.method in SAFE_METHODS:
             return []
         return [IsAuthorPermission()]
+
+    @action(detail=True, methods=['post', 'delete'])
+    def like_unlike(self, request, pk=None):
+        publication = self.get_object()
+        if request.method == 'POST':
+            publication.likes.add(request.user)
+            return Response({'detail': 'Лайк успешно добавлен.'}, status=status.HTTP_200_OK)
+        elif request.method == 'DELETE':
+            publication.likes.remove(request.user)
+            return Response({'detail': 'Лайк успешно удален.'}, status=status.HTTP_200_OK)
 
 
 class LogoutView(APIView):
