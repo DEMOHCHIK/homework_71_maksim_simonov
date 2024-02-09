@@ -4,7 +4,7 @@ from django.shortcuts import render, reverse, get_object_or_404, redirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from ..models import Publication
+from ..models import Publication, Comment
 from ..forms import PublisherForm
 
 
@@ -14,6 +14,18 @@ class HomeView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Publication.objects.filter(author__in=self.request.user.subscriptions_users.all()).order_by('-created')
+
+
+class PublicationView(DetailView):
+    model = Publication
+    template_name = 'publication/publication_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        publication = self.get_object()
+        comments = Comment.objects.filter(publication=publication)
+        context['comments'] = comments
+        return context
 
 
 class PublicationCreateView(LoginRequiredMixin, CreateView):

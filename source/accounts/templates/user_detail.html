@@ -63,12 +63,10 @@
             </a>
         {% endif %}
         {% for publication in user_obj.publications.all %}
-            <a href="#" class="col  d-inline-block px-0" style="width: 400px; height: 400px">
+            <a href="{% url 'webapp:publication_view' publication.pk %}" class="col  d-inline-block px-0" style="width: 400px; height: 400px">
                 <img src="{{ publication.picture.url }}" class="w-100 h-100 object-fit-cover">
             </a>
         {% endfor %}
-
-
     </div>
 
 

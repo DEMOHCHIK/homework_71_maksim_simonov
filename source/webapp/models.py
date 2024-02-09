@@ -5,7 +5,6 @@ from django.db import models
 class Publication(models.Model):
     picture = models.ImageField(upload_to='publication/picture/', verbose_name='Аватар')
     description = models.TextField(verbose_name='Описание')
-    comments_count = models.PositiveIntegerField(default=0, verbose_name='Счетчик комментариев')
     author = models.ForeignKey(get_user_model(), related_name='publications', on_delete=models.CASCADE,
                                verbose_name='Автор')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
@@ -24,3 +23,15 @@ class Publication(models.Model):
         self.author.publication_counter -= 1
         self.author.save()
         return super().delete(*args, **kwargs)
+
+
+class Comment(models.Model):
+    publication = models.ForeignKey('webapp.Publication', related_name='comments', on_delete=models.CASCADE,
+                                    verbose_name='Пост')
+    text = models.TextField(max_length=400, verbose_name='Комментарий')
+    author = models.ForeignKey(get_user_model(), default=1, related_name='comments', on_delete=models.CASCADE,
+                               verbose_name="Автор")
+    likes = models.ManyToManyField(get_user_model(), related_name='comment_likes')
+
+    def __str__(self):
+        return self.text[:20]
